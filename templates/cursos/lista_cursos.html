@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Mis cursos{% endblock %}
+
+{% block contenido %}
+<div class="caja" style="width: 480px;">
+    <h2>Mis cursos</h2>
+
+    <ul style="padding-left: 0; list-style: none;">
+        {% for item in cursos_disponibles %}
+            <li style="margin-bottom: 10px;">
+                Curso {{ item.curso.orden }} – {{ item.curso.titulo }}
+
+                {% if item.disponible %}
+                    <a href="{% url 'detalle_curso' item.curso.id %}">Entrar</a>
+                {% else %}
+                    🔒 Bloqueado
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'dashboard' %}">Volver al dashboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+Anotaciones: 
+- Como de cursos salto al calendario? no hay botón que te lleve. Sería una buena opción que desde el dashboard te lleve al calendario. 
+- Fondo de los cuestionarios. Debe ser el que es rosa. Tratar de centrarlo. 
+- Centrar el feedback. Que el fondo sea el de todo rosa. 
+- Hacerla resoluble para los celulares.
+- Deploy de la app.
+- Ver que nuevos fondos hace martu.

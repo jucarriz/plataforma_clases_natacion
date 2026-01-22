@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Calendario{% endblock %}
+
+{% block contenido %}
+<div class="caja" style="width: 800px;">
+    <h2>Calendario – {{ mes }} {{ anio }}</h2>
+
+    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+        <a href="?year={{ prev_year }}&month={{ prev_month }}">⬅ Mes anterior</a>
+        <a href="?year={{ next_year }}&month={{ next_month }}">Mes siguiente ➡</a>
+    </div>
+
+    <table style="width:100%; border-collapse: collapse; text-align: center;">
+        <tr>
+            <th>Lun</th>
+            <th>Mar</th>
+            <th>Mié</th>
+            <th>Jue</th>
+            <th>Vie</th>
+            <th>Sáb</th>
+            <th>Dom</th>
+        </tr>
+
+        <tr>
+        {% for dia in calendario %}
+            <td style="
+                border:1px solid #ccc;
+                padding:10px;
+                vertical-align: top;
+                background: {{ dia.color }};">
+                <strong>{{ dia.fecha.day }}</strong>
+
+                {% for evento in dia.eventos %}
+                    <div style="
+                        background:#ffc107;
+                        margin-top:5px;
+                        padding:4px;
+                        border-radius:4px;
+                        font-size:12px;
+                    ">
+                        {{ evento.titulo }}
+                    </div>
+                {% endfor %}
+            </td>
+
+            {% if forloop.counter|divisibleby:7 %}
+                </tr><tr>
+            {% endif %}
+        {% endfor %}
+        </tr>
+    </table>
+
+    <div class="enlace">
+        <a href="{% url 'dashboard' %}">Volver al dashboard</a>
+    </div>
+</div>
+{% endblock %}

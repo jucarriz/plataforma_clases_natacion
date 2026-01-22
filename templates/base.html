@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Plataforma{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+
+<body class="{{ layout|default:'' }}">
+
+{% block body %}
+    <div class="contenedor">
+        {% block contenido %}{% endblock %}
+    </div>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Feedback{% endblock %}
+
+{% block contenido %}
+<div class="caja" style="width: 500px;">
+    <h2>Feedback – {{ curso.titulo }}</h2>
+
+    <p>Contanos tu opinión sobre este curso.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar feedback</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{ curso.titulo }}{% endblock %}
+
+{% block contenido %}
+<div class="caja" style="width: 600px;">
+    <h2>{{ curso.titulo }}</h2>
+
+    <p>{{ curso.descripcion }}</p>
+
+    {% if video_url %}
+        <iframe
+            width="100%"
+            height="315"
+            src="{{ video_url }}"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    {% else %}
+        <p>No se pudo cargar el video.</p>
+    {% endif %}
+
+    {% if not progreso.completado %}
+    <div style="margin-top: 20px;">
+        <a href="{% url 'cuestionario' curso.id %}">
+            <button type="button">Ir al cuestionario</button>
+        </a>
+    </div>
+    {% else %}
+    <p>✅ Curso completado</p>
+    {% endif %}
+
+
+    <div class="enlace">
+        <a href="{% url 'lista_cursos' %}">Volver a cursos</a>
+    </div>
+</div>
+{% endblock %}

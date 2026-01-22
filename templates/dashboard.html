@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block contenido %}
+<div class="caja" style="width: 400px; text-align: center;">
+    <h2>Bienvenido {{ request.user.email }}</h2>
+
+    <p>Curso actual habilitado: {{ perfil.curso_actual }}</p>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'lista_cursos' %}">
+            <button>Ir a mis cursos</button>
+        </a>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <a href="{% url 'calendario' %}">
+            <button>Ver calendario</button>
+        </a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,174 @@
+/* =========================
+   RESET GENERAL
+   ========================= */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   LAYOUT AUTH (login / registro / password)
+   ========================= */
+
+body.layout-auth {
+    min-height: 100vh;
+    background-image: url("../fondos/Image (1).png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Grid fijo: izquierda imagen / derecha verde */
+body.layout-auth .contenedor {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    min-height: 100vh;
+}
+
+/* Caja siempre en la columna derecha */
+body.layout-auth .contenedor > .caja {
+    grid-column: 2;
+    align-self: center;
+    justify-self: center;
+}
+
+/* =========================
+   CAJA
+   ========================= */
+
+.caja {
+    background: white;
+    padding: 30px;
+    width: 360px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+/* =========================
+   TIPOGRAFÍA Y CONTROLES
+   ========================= */
+
+h2 {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+a {
+    color: #0066cc;
+}
+
+/* =========================
+   LAYOUT DASHBOARD / CALENDARIO
+   ========================= */
+
+body.layout-dashboard {
+    min-height: 100vh;
+    background-image: url("../fondos/Image (2).png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Contenedor centrado */
+body.layout-dashboard .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT CURSOS (GRID REAL)
+   ========================= */
+
+body.layout-cursos {
+    min-height: 100vh;
+    background-image: url("../fondos/Image.png");
+    background-size: cover;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+body.layout-cursos .contenedor {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    min-height: 100vh;
+}
+
+/* Caja vive en la columna derecha */
+body.layout-cursos .contenedor > .caja {
+    grid-column: 2;
+    align-self: start;
+    justify-self: center;
+    margin-top: 100px;
+}
+
+
+
+/* =========================
+   RESPONSIVE MÓVIL
+   ========================= */
+
+@media (max-width: 768px) {
+
+    /* ===== AUTH ===== */
+    body.layout-auth {
+        background-image: none;
+        background-color: #2f7f7a; /* verde */
+    }
+
+    body.layout-auth .contenedor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    body.layout-auth .contenedor > .caja {
+        grid-column: auto;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    /* ===== DASHBOARD / CALENDARIO ===== */
+    body.layout-dashboard .contenedor {
+        padding: 20px;
+    }
+
+    body.layout-dashboard .caja {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* ===== CURSOS ===== */
+    body.layout-cursos {
+        background-image: none;
+        background-color: #e6cfe3; /* rosa liso */
+    }
+
+    body.layout-cursos .contenedor {
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    body.layout-cursos .caja {
+        width: 100%;
+        max-width: 500px;
+    }
+}

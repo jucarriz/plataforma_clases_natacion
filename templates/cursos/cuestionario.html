@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Cuestionario - {{ curso.titulo }}{% endblock %}
+
+{% block contenido %}
+<div class="caja" style="width: 700px;">
+    <h2>Cuestionario - {{ curso.titulo }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for pregunta in preguntas %}
+            <p><strong>{{ forloop.counter }}. {{ pregunta.texto }}</strong></p>
+
+            {% for opcion in pregunta.opcion_set.all %}
+                <label style="display:block; margin-bottom:5px;">
+                    <input type="radio" name="{{ pregunta.id }}" value="{{ opcion.id }}">
+                    {{ opcion.texto }}
+                </label>
+            {% endfor %}
+            <br>
+        {% endfor %}
+
+        <button type="submit">Enviar respuestas</button>
+    </form>
+</div>
+{% endblock %}

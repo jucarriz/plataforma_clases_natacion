@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Resultado{% endblock %}
+
+{% block contenido %}
+<div class="caja">
+    <h2>Resultado del cuestionario</h2>
+
+    <p>Respuestas correctas: {{ correctas }}</p>
+    <p>Respuestas incorrectas: {{ incorrectas }}</p>
+
+    {% if aprobado %}
+        <p style="color: green;">✅ Aprobado</p>
+
+        <a href="{% url 'feedback' curso.id %}">
+            <button>Dejar feedback</button>
+        </a>
+
+        <br><br>
+        <a href="{% url 'lista_cursos' %}">Continuar</a>
+    {% else %}
+        <p style="color: red;">❌ No aprobado</p>
+        <a href="{% url 'cuestionario' curso.id %}">Intentar nuevamente</a>
+    {% endif %}
+</div>
+{% endblock %}
