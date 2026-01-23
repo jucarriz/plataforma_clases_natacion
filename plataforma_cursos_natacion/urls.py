@@ -6,8 +6,13 @@ from usuarios.views import (
     PasswordResetConfirmViewCustom,
     PasswordResetCompleteViewCustom,
 )
+from django.shortcuts import redirect
+
+def home_redirect(request):
+    return redirect('login')
 
 urlpatterns = [
+    path('', home_redirect),
     path('admin/', admin.site.urls),
     path('', include('usuarios.urls')),
     path('cursos/', include('cursos.urls')),

@@ -5,3 +5,69 @@ Anotaciones:
 - Hacerla resoluble para los celulares.
 - Deploy de la app.
 - Ver que nuevos fondos hace martu.
+
+🧠 COSAS IMPORTANTES A SABER (TRANQUILIDAD)
+✔ Cambios futuros
+
+Cada vez que:
+
+cambies CSS
+
+cambies templates
+
+ajustes lógica
+
+Solo tenés que:
+
+git add .
+git commit -m "mejora visual"
+git push
+
+
+👉 Render redeploya solo.
+
+✔ Eventos del calendario
+
+Se agregan desde el admin
+
+No requieren redeploy
+
+✔ Usuarios / cursos / feedback
+
+Persisten
+
+No se pierden
+
+⚠️ Nota sobre el plan Free
+
+Si nadie entra en 15 min, Render “duerme” la app
+
+El primer acceso puede tardar 30–60 segundos
+
+Para producción real, se pasa a plan pago (cuando quieras)
+
+🧪 SI ALGO FALLA
+
+Si ves:
+
+Error 500
+
+Pantalla blanca
+
+Problemas con static files
+
+👉 Copiame los logs finales y lo resolvemos.
+
+🚀 SIGUIENTE PASO (opcional)
+
+Cuando confirmes que la URL carga bien, podemos:
+
+1️⃣ Configurar dominio propio
+2️⃣ Optimizar seguridad
+3️⃣ Ajustar performance
+4️⃣ Hacer backup de base de datos
+5️⃣ Preparar versión final para uso real
+
+Decime:
+
+👉 ¿Ya te dio la URL Render y carga la página?
