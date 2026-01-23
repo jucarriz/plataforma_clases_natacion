@@ -71,3 +71,141 @@ Cuando confirmes que la URL carga bien, podemos:
 Decime:
 
 👉 ¿Ya te dio la URL Render y carga la página?
+
+
+Muy buena pregunta 👍
+La respuesta corta y clara es:
+
+✅ Con el git push alcanza. NO tenés que hacer deploy manual.
+
+Ahora te explico por qué, cuándo sí harías deploy manual, y cómo verificar que todo esté bien.
+
+🚀 CÓMO FUNCIONA RENDER (importante entenderlo)
+
+Render, por defecto, trabaja así:
+
+🔁 Auto-deploy activado
+
+Cada vez que hacés:
+
+git push
+
+
+Render:
+
+detecta el cambio
+
+vuelve a correr build.sh
+
+vuelve a ejecutar start.sh
+
+redeploya automáticamente
+
+👉 No hay que tocar nada en el dashboard.
+
+🟢 TU CASO CONCRETO
+
+Vos:
+
+ya subiste el repo
+
+ya tenés un Web Service activo
+
+ya viste que Render hizo el build
+
+ya te dio una URL pública
+
+👉 Eso significa que auto-deploy está funcionando.
+
+Entonces:
+
+✔ Hacés git push
+✔ Esperás 1–3 minutos
+✔ Render redeploya solo
+
+❓ ENTONCES, ¿PARA QUÉ SIRVE EL BOTÓN “Manual Deploy”?
+
+Ese botón sirve solo en casos especiales:
+
+🟡 Cuándo usar Manual Deploy
+
+Cambiaste variables de entorno (SECRET_KEY, DB, etc.)
+
+El último deploy falló y querés reintentar
+
+Render quedó “colgado”
+
+Querés redeployar sin cambiar código
+
+🔴 Cuándo NO hace falta
+
+Cambios de código
+
+Cambios de templates
+
+Cambios de CSS
+
+Cambios de URLs
+
+👉 En todos esos casos, git push alcanza.
+
+🧪 CÓMO VER QUE SE ESTÁ REDEPLOYANDO
+
+Después de hacer git push:
+
+Entrá a:
+
+https://dashboard.render.com/
+
+
+Abrí tu servicio
+
+Mirá la pestaña Deploys
+
+Vas a ver algo como:
+
+Deploy triggered by push to main
+
+estado: Building → Deploying → Live
+
+🧠 RESUMEN CLARO
+Acción	¿Hace falta manual deploy?
+git push	❌ No
+Cambiar CSS	❌ No
+Cambiar templates	❌ No
+Cambiar lógica Django	❌ No
+Cambiar env vars	✅ Sí
+Reintentar un error	✅ Sí
+✅ QUÉ TE RECOMIENDO AHORA
+
+Hacé el cambio del redirect / → /login
+
+Ejecutá:
+
+git add .
+git commit -m "Redirect root to login"
+git push
+
+
+Esperá el auto-deploy
+
+Abrí:
+
+https://plataforma-clases-natacion.onrender.com/
+
+
+👉 Tiene que llevarte directo al login.
+
+Cuando lo pruebes, decime:
+
+👉 ¿Ya redirige correctamente?
+
+Y después, si querés, pasamos a:
+
+dominio propio
+
+seguridad final
+
+checklist de producción
+
+o dejar cerrada la versión 1.0 🎉
