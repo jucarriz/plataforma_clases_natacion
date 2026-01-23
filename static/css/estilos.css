@@ -12,8 +12,7 @@ body {
    ========================= */
 
 body.layout-auth {
-    min-height: 100vh;
-    background-image: url("../fondos/Image (1).png");
+    background-image: url("../fondos/auth_bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -77,8 +76,7 @@ a {
    ========================= */
 
 body.layout-dashboard {
-    min-height: 100vh;
-    background-image: url("../fondos/Image (2).png");
+    background-image: url("../fondos/dashboard_bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -97,8 +95,7 @@ body.layout-dashboard .contenedor {
    ========================= */
 
 body.layout-cursos {
-    min-height: 100vh;
-    background-image: url("../fondos/Image.png");
+    background-image: url("../fondos/courses_bg.png");
     background-size: cover;
     background-position: left center;
     background-repeat: no-repeat;
