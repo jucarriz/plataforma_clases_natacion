@@ -5,6 +5,10 @@
 <div class="caja">
     <h2>Iniciar sesión</h2>
 
+    {% if error %}
+    <p style="color: red; margin-bottom: 10px;">{{ error }}</p>
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
