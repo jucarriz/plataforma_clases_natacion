@@ -92,7 +92,7 @@ def detalle_curso(request, curso_id):
     'curso': curso,
     'video_url': video_url,
     'progreso': progreso,
-    'layout': 'layout-dashboard'   # 👈 CAMBIO CLAVE
+    'layout': 'layout-detalle-curso'
 })
 
 @login_required
@@ -143,13 +143,14 @@ def cuestionario(request, curso_id):
             'curso': curso,
             'correctas': correctas,
             'incorrectas': incorrectas,
-            'aprobado': aprobado
+            'aprobado': aprobado,
+            'layout': 'layout-cuestionario'
         })
 
     return render(request, 'cursos/cuestionario.html', {
     'curso': curso,
     'preguntas': preguntas,
-    'layout': 'layout-dashboard'
+    'layout': 'layout-cuestionario'
     })
 
 
@@ -175,7 +176,7 @@ def feedback(request, curso_id):
     return render(request, 'cursos/feedback.html', {
     'curso': curso,
     'form': form,
-    'layout': 'layout-dashboard'
+    'layout': 'layout-feedback'
 })
 
 
@@ -185,6 +186,12 @@ def calendario_view(request):
 
     year = int(request.GET.get('year', hoy.year))
     month = int(request.GET.get('month', hoy.month))
+
+    # Nombres de meses en español
+    meses_espanol = [
+        '', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ]
 
     cal = calendar.Calendar(firstweekday=0)  # Lunes
     dias_mes = list(cal.itermonthdates(year, month))
@@ -227,12 +234,12 @@ def calendario_view(request):
 
     return render(request, 'cursos/calendario.html', {
     'calendario': calendario,
-    'mes': calendar.month_name[month],
+    'mes': meses_espanol[month],
     'anio': year,
     'prev_month': prev_month,
     'prev_year': prev_year,
     'next_month': next_month,
     'next_year': next_year,
-    'layout': 'layout-dashboard'
+    'layout': 'layout-calendario'
 })
 

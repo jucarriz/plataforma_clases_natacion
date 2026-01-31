@@ -12,7 +12,7 @@ body {
    ========================= */
 
 body.layout-auth {
-    background-image: url("../fondos/auth_bg.png");
+    background-image: url("../fondos/login_bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -72,11 +72,11 @@ a {
 }
 
 /* =========================
-   LAYOUT DASHBOARD / CALENDARIO
+   LAYOUT DASHBOARD (Bienvenido)
    ========================= */
 
 body.layout-dashboard {
-    background-image: url("../fondos/dashboard_bg.png");
+    background-image: url("../fondos/dashboard_cuestionario_bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -91,28 +91,98 @@ body.layout-dashboard .contenedor {
 }
 
 /* =========================
-   LAYOUT CURSOS (GRID REAL)
+   LAYOUT CALENDARIO
+   ========================= */
+
+body.layout-calendario {
+    background-image: url("../fondos/calendario_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.layout-calendario .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT CUESTIONARIO Y RESULTADO
+   ========================= */
+
+body.layout-cuestionario {
+    background-image: url("../fondos/dashboard_cuestionario_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.layout-cuestionario .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Centrar texto en cuestionarios */
+body.layout-cuestionario .caja {
+    text-align: center;
+}
+
+/* =========================
+   LAYOUT DETALLE CURSO
+   ========================= */
+
+body.layout-detalle-curso {
+    background-image: url("../fondos/detalle_curso_bg.png");
+    background-size: cover;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+}
+
+body.layout-detalle-curso .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT FEEDBACK
+   ========================= */
+
+body.layout-feedback {
+    background-image: url("../fondos/feedback_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.layout-feedback .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT CURSOS
    ========================= */
 
 body.layout-cursos {
-    background-image: url("../fondos/courses_bg.png");
+    background-image: url("../fondos/mis_cursos_bg.png");
     background-size: cover;
-    background-position: left center;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
 body.layout-cursos .contenedor {
-    display: grid;
-    grid-template-columns: 50% 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-}
-
-/* Caja vive en la columna derecha */
-body.layout-cursos .contenedor > .caja {
-    grid-column: 2;
-    align-self: start;
-    justify-self: center;
-    margin-top: 100px;
 }
 
 
@@ -160,8 +230,6 @@ body.layout-cursos .contenedor > .caja {
 
     body.layout-cursos .contenedor {
         padding: 20px;
-        justify-content: center;
-        align-items: center;
     }
 
     body.layout-cursos .caja {

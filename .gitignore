@@ -1,1 +1,6 @@
 env
+usuarios\__pycache__
+usuarios\migrations
+plataforma_cursos_natacion\__pycache__
+cursos\__pycache__
+cursos\migrations
