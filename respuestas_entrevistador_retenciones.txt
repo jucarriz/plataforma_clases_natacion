@@ -1,0 +1,19 @@
+¿Con qué tecnologías venís trabajando?
+
+Vengo trabajando fuerte con Python para todo el backend, sobre Azure Functions en modo serverless. Del lado de IA, uso Azure OpenAI con GPT-5.4 vía LangChain, aplicando structured outputs con Pydantic para garantizar que el modelo devuelva siempre un schema válido, no texto libre. Como pipeline de documentos uso Azure Document Intelligence para pasar PDFs a markdown, y después persisto todo en CosmosDB y Blob Storage. Para el negocio esto es clave: estamos automatizando la lectura de certificados fiscales que antes se cargaban a mano, así que la stack tiene que ser confiable en producción, no un prototipo.
+
+¿Algún desafío que te haya tocado enfrentar? ¿Cómo se solucionó?
+
+Sí, tuve un caso concreto con la integración a Document Intelligence a través del APIM corporativo. El polling fallaba porque Azure devolvía la URL de seguimiento apuntando directo al recurso cognitivo, no al gateway interno, y la red no dejaba pasar esa conexión directa. Lo resolví interceptando y reescribiendo ese header antes de hacer el polling, para que siempre pasara por el dominio interno de la empresa. Fue un desafío más de "entender la topología de red corporativa" que de código puro, pero si no lo resolvía, directamente no podíamos leer ningún documento en producción — bloqueaba todo el negocio de validación de retenciones.
+
+¿Alguna decisión difícil que te haya tocado tomar?
+
+Sí. En un momento el sistema, cuando detectaba que el monto retenido superaba la base imponible, corregía automáticamente invirtiendo los valores — una regla silenciosa. Decidí sacar esa auto-corrección y reemplazarla por una alerta que manda el documento a revisión humana. Fue difícil porque significaba menos automatización y más carga para el equipo de validación a corto plazo. Pero para un dato que después se usa para crédito fiscal, prefiero que un humano confirme un caso raro a que el sistema "adivine" silenciosamente y se genere un error contable que nadie audite. Fue priorizar confiabilidad del dato por sobre el porcentaje de automatización.
+
+¿Qué patrones de diseño se usan con Python en el proyecto?
+
+Uso bastante Strategy: tengo un router que analiza el documento con el LLM y decide qué estrategia de extracción aplicar según el tipo de tabla o formato, y después un chain de estrategias con prioridad hasta encontrar una que matchee. También aplico Singleton para los clientes de Cosmos y Blob, para no abrir conexión nueva en cada invocación de la function. Y uso mucho el patrón Adapter para encapsular la llamada HTTP cruda a servicios de Azure detrás de una interfaz limpia que el resto del código consume sin saber que hay un retry con backoff o un polling atrás. Pydantic lo uso como capa de validación obligatoria antes de que cualquier dato toque CosmosDB.
+
+¿Qué te motiva a cambiar de trabajo?
+
+Busco un rol donde pueda meterme más en el diseño de producto de IA de punta a punta, no solo en la parte de integración. Hoy resuelvo mucho desafío de infraestructura corporativa — redes internas, gateways, VPNs — y eso me saca foco de lo que más me gusta, que es diseñar el pipeline de IA en sí: estrategias de extracción, verificación, aprendizaje con few-shot. Me interesa una empresa donde el producto de IA sea el centro del negocio y no un módulo dentro de un sistema mucho más grande, para poder iterar más rápido y medir impacto de negocio de forma más directa.

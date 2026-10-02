@@ -1,0 +1,19 @@
+1. ¿Con qué tecnologías venís trabajando?
+
+Trabajo principalmente en Python, orquestando pipelines de IA con LangGraph y LangChain sobre Azure OpenAI (manejo varios modelos en paralelo — GPT-4.1-mini, GPT-4.1 y GPT-5.4 — según el costo/latencia que necesita cada tarea) y Azure Document Intelligence para OCR. Todo corre como Azure Functions, con Pydantic para validar cada dato que entra y sale del sistema, y Azure Blob Storage como fuente de datos de referencia. El caso de uso es extracción y verificación automática de documentación de RRHH — básicamente, reemplazar revisión manual de carpetas de empleados por un pipeline que lee, valida y arma un reporte de aprobado/rechazado.
+
+2. ¿Algún desafío que hayas tenido que enfrentar? ¿Cómo lo resolviste?
+
+Tuve un bug de producción bastante esquivo: un endpoint fallaba intermitentemente con "Event loop is closed", y una vez resuelto eso, apareció otro síntoma distinto en el mismo módulo (llamadas a Document Intelligence que fallaban en paralelo sin ningún log útil). Lo ataqué de forma metódica: descarté hipótesis una por una con evidencia de logs reales, reproduje el problema de forma aislada fuera del pipeline completo para confirmar la causa exacta, y terminé encontrando que el servicio de OCR no toleraba bien la concurrencia bajo carga real. La solución fue serializar esas llamadas en vez de pelear contra el límite de concurrencia. Para el negocio, esto se traducía directamente en carpetas de empleados que se rechazaban o quedaban con datos faltantes sin motivo real — así que no era solo un tema técnico, afectaba la confiabilidad del proceso que ve RRHH.
+
+3. ¿Alguna decisión difícil que hayas tenido que tomar?
+
+Sí: decidir serializar esas llamadas a Document Intelligence en vez de mantenerlas en paralelo. Significaba resignar velocidad (el documento tarda más en procesarse) a cambio de confiabilidad. La decisión difícil no fue técnica, fue de prioridad: ¿optimizamos por velocidad o por que el dato esté bien? Elegí confiabilidad, porque un dato faltante o un rechazo incorrecto le genera al negocio mucho más costo (una carpeta de empleado mal procesada, re-trabajo manual) que unos segundos extra de procesamiento.
+
+4. ¿Qué patrones de diseño usás en Python en este proyecto?
+
+El pipeline de extracción en sí está modelado como una máquina de estados — un grafo dirigido (LangGraph StateGraph) donde cada nodo transforma un estado tipado compartido (TypedDict), que es básicamente un Pipeline/Chain of Responsibility hecho explícito. Para los clientes de modelos uso Factory + Singleton: cada cliente de Azure OpenAI se construye una sola vez vía una función factory con caché a nivel de módulo, para no recrear conexiones en cada request. Toda entrada/salida de datos pasa por modelos Pydantic, que funcionan como Data Transfer Objects con validación incorporada — en vez de tirar excepciones genéricas, cada documento tiene su propio esquema tipado. Y para decidir qué prompt o qué validación aplicar según el tipo de documento, uso diccionarios de dispatch (un Strategy bastante simple: tipo_documento -> función/prompt correspondiente) en vez de cadenas de if/elif gigantes.
+
+5. ¿Qué te motiva a cambiar de trabajo?
+
+Busco un desafío de mayor escala — pasar de tener ownership de un pipeline puntual a tener impacto en un sistema de IA más amplio, con más usuarios y más superficie de decisiones de arquitectura. Lo que encontré en este proyecto es que la parte más valiosa no fue escribir el prompt que funciona, sino diagnosticar por qué algo falla de forma intermitente en producción y entender el costo real para el negocio de cada decisión técnica — eso es lo que quiero seguir haciendo, pero con mayor alcance
